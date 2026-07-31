@@ -1,4 +1,4 @@
-import type { Request, Response, Usage } from './types'
+import type { RequestBody, Response, Usage } from './types'
 import { request } from './request'
 
 export type GenerateTextResult = {
@@ -51,7 +51,7 @@ function assertTextResponse(response: Response) {
 }
 
 export async function generateText(
-  requestBody: Request,
+  requestBody: RequestBody,
 ): Promise<GenerateTextResult> {
   const response = await request(requestBody)
   assertTextResponse(response)
@@ -65,7 +65,7 @@ export async function generateText(
 }
 
 export async function* streamText(
-  requestBody: Request,
+  requestBody: RequestBody,
 ): AsyncGenerator<string> {
   const events = await request({ ...requestBody, stream: true })
 

@@ -211,15 +211,15 @@ type RequestOptions = {
   user?: string
 }
 
-type BaseRequest = RequestOptions &
+export type RequestBody = RequestOptions &
   (
     | { input: Input; instructions?: string }
     | { input?: Input; instructions: string }
   )
 
-export type Request = BaseRequest & { stream?: false }
+export type Request = RequestBody & { stream?: false }
 
-export type StreamRequest = BaseRequest & { stream: true }
+export type StreamRequest = RequestBody & { stream: true }
 
 export type Usage = {
   input_tokens: number

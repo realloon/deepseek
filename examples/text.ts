@@ -1,7 +1,22 @@
-import { generateText } from '../index'
+import { generateText, streamText } from '../index'
 
-const { text } = await generateText({
-  input: 'hello',
+// const { text, reasoning } = await generateText({
+//   input: 'rimsage 是什么？',
+//   tools: [
+//     {
+//       type: 'web_search',
+//     },
+//   ],
+// })
+
+// console.log(`<thinking>\n${reasoning}\n</thinking>\n`)
+// console.log(text)
+
+const stream = streamText({
+  input: 'rimsage 是什么？',
+  tools: [
+    {
+      type: 'web_search',
+    },
+  ],
 })
-
-console.log(text)
