@@ -6,4 +6,4 @@ export {
   getReasoningText,
   streamText,
 } from './src/text'
-export type { GenerateTextResult } from './src/text'
+export type { GenerateTextResult, StreamTextChunk } from './src/text'

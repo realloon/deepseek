@@ -8,6 +8,11 @@ export type GenerateTextResult = {
   response: Response
 }
 
+export type StreamTextChunk =
+  | { type: 'text-delta'; delta: string }
+  | { type: 'reasoning-delta'; delta: string }
+  | { type: 'finish'; response: Response }
+
 export function getOutputText(response: Response): string {
   return response.output
     .filter(item => item.type === 'message')
@@ -66,17 +71,27 @@ export async function generateText(
 
 export async function* streamText(
   requestBody: RequestBody,
-): AsyncGenerator<string> {
+): AsyncGenerator<StreamTextChunk> {
   const events = await request({ ...requestBody, stream: true })
 
   for await (const event of events) {
     if (event.type === 'response.output_text.delta') {
-      yield event.delta
+      yield { type: 'text-delta', delta: event.delta }
+      continue
+    }
+
+    if (event.type === 'response.reasoning_text.delta') {
+      yield { type: 'reasoning-delta', delta: event.delta }
+      continue
+    }
+
+    if (event.type === 'response.completed') {
+      assertTextResponse(event.response)
+      yield { type: 'finish', response: event.response }
       continue
     }
 
     if (
-      event.type === 'response.completed' ||
       event.type === 'response.incomplete' ||
       event.type === 'response.failed'
     ) {
