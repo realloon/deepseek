@@ -3,7 +3,9 @@ import parseStream from './utils/parseStream'
 
 const endpoint = 'https://api.deepseek.com/responses'
 
-export function request(request: StreamRequest): Promise<AsyncIterable<StreamEvent>>
+export function request(
+  request: StreamRequest,
+): Promise<AsyncIterable<StreamEvent>>
 
 export function request(request: Request): Promise<Response>
 
@@ -37,11 +39,11 @@ export async function request(
   return (await response.json()) as Response
 }
 
-export function getOutputText(response: Response): string {
+export function getOutputText(response: Response) {
   return response.output
-    .filter((item) => item.type === 'message')
-    .flatMap((item) => item.content)
-    .filter((part) => part.type === 'output_text')
-    .map((part) => part.text)
+    .filter(item => item.type === 'message')
+    .flatMap(item => item.content)
+    .filter(part => part.type === 'output_text')
+    .map(part => part.text)
     .join('')
 }
