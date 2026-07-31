@@ -8,8 +8,8 @@
     "access": "public"
   },
   "sideEffects": false,
-  "types": "./index.ts",
   "module": "./index.ts",
+  "types": "./index.ts",
   "files": [
     "index.ts",
     "src"
