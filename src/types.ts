@@ -200,7 +200,7 @@ type TextFormat =
 
 type RequestOptions = {
   model?: Model
-  reasoning?: { effort: 'high' | 'max' }
+  reasoning?: { effort: 'none' | 'high' | 'max' }
   max_output_tokens?: number
   temperature?: number
   top_p?: number
