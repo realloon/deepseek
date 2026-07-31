@@ -1,5 +1,7 @@
 export type Model = 'deepseek-v4-flash'
 
+type ItemStatus = 'in_progress' | 'completed' | 'incomplete'
+
 export type Message = {
   type?: 'message'
   role: 'system' | 'developer' | 'assistant' | 'user'
@@ -29,6 +31,32 @@ export type WebSearchCall = {
   id: string
   status: 'in_progress' | 'searching' | 'completed' | 'failed'
 }
+
+type OutputText = {
+  type: 'output_text'
+  text: string
+  annotations: Array<Record<string, unknown>>
+}
+
+export type OutputItem =
+  | {
+      id: string
+      type: 'message'
+      status: ItemStatus
+      role: 'assistant'
+      content: OutputText[]
+    }
+  | (ReasoningItem & { id: string })
+  | (FunctionCall & { id: string; status: ItemStatus })
+  | {
+      id: string
+      type: 'custom_tool_call'
+      call_id: string
+      name: 'apply_patch'
+      input: string
+      status: ItemStatus
+    }
+  | WebSearchCall
 
 export type Input =
   | string
@@ -93,35 +121,6 @@ type BaseRequest = RequestOptions &
 export type Request = BaseRequest & { stream?: false }
 
 export type StreamRequest = BaseRequest & { stream: true }
-
-type OutputText = {
-  type: 'output_text'
-  text: string
-  annotations: Array<Record<string, unknown>>
-}
-
-export type OutputItem =
-  | {
-      id: string
-      type: 'message'
-      status: 'in_progress' | 'completed' | 'incomplete'
-      role: 'assistant'
-      content: OutputText[]
-    }
-  | (ReasoningItem & { id: string })
-  | (FunctionCall & {
-      id: string
-      status: 'in_progress' | 'completed' | 'incomplete'
-    })
-  | {
-      id: string
-      type: 'custom_tool_call'
-      call_id: string
-      name: 'apply_patch'
-      input: string
-      status: 'in_progress' | 'completed' | 'incomplete'
-    }
-  | WebSearchCall
 
 export type Usage = {
   input_tokens: number

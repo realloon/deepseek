@@ -1,4 +1,4 @@
-import type { StreamEvent } from '../types'
+import type { StreamEvent } from './types'
 
 const terminalEvents = new Set<StreamEvent['type']>([
   'response.completed',
