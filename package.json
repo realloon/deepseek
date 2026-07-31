@@ -2,11 +2,11 @@
   "name": "@realloon/deepseek",
   "version": "0.1.0",
   "description": "A lightweight DeepSeek Responses API client",
-  "type": "module",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "sideEffects": false,
   "module": "./index.ts",
   "types": "./index.ts",
