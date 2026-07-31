@@ -2,6 +2,7 @@ import type { Request, Response, StreamEvent, StreamRequest } from './types'
 import parseStream from './parseStream'
 
 const endpoint = 'https://api.deepseek.com/responses'
+const defaultModel = 'deepseek-v4-flash'
 
 export function request(request: Request): Promise<Response>
 
@@ -22,7 +23,10 @@ export async function request(
       Accept: request.stream ? 'text/event-stream' : 'application/json',
       Authorization: `Bearer ${apiKey}`,
     },
-    body: JSON.stringify(request),
+    body: JSON.stringify({
+      ...request,
+      model: request.model ?? defaultModel,
+    }),
   })
 
   if (!response.ok) {

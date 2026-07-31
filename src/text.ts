@@ -1,5 +1,12 @@
-import type { Request, Response } from './types'
+import type { Request, Response, Usage } from './types'
 import { request } from './request'
+
+export type GenerateTextResult = {
+  text: string
+  reasoning: string | null
+  usage: Usage | null
+  response: Response
+}
 
 export function getOutputText(response: Response): string {
   return response.output
@@ -7,6 +14,16 @@ export function getOutputText(response: Response): string {
     .flatMap(item => item.content)
     .map(part => part.text)
     .join('')
+}
+
+export function getReasoningText(response: Response): string | null {
+  const reasoning = response.output
+    .filter(item => item.type === 'reasoning')
+    .flatMap(item => item.content)
+    .map(part => part.text)
+    .join('')
+
+  return reasoning || null
 }
 
 function assertTextResponse(response: Response) {
@@ -33,10 +50,18 @@ function assertTextResponse(response: Response) {
   }
 }
 
-export async function generateText(requestBody: Request): Promise<string> {
+export async function generateText(
+  requestBody: Request,
+): Promise<GenerateTextResult> {
   const response = await request(requestBody)
   assertTextResponse(response)
-  return getOutputText(response)
+
+  return {
+    text: getOutputText(response),
+    reasoning: getReasoningText(response),
+    usage: response.usage,
+    response,
+  }
 }
 
 export async function* streamText(

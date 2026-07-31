@@ -1,8 +1,12 @@
 import { generateText } from '../index'
 
-const text = await generateText({
-  model: 'deepseek-v4-flash',
-  input: 'ping',
+const { text } = await generateText({
+  input: [
+    {
+      role: 'user',
+      content: 'ping',
+    },
+  ],
 })
 
 console.log(text)
