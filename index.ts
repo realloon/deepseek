@@ -1,4 +1,5 @@
 export type * from './src/types'
+export type { GenerateTextResult, StreamTextChunk } from './src/text'
 export { request } from './src/request'
 export {
   generateText,
@@ -6,4 +7,3 @@ export {
   getReasoningText,
   streamText,
 } from './src/text'
-export type { GenerateTextResult, StreamTextChunk } from './src/text'

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "exactOptionalPropertyTypes": true,
-    "types": ["node"]
+    "types": ["node"],
+    "noEmit": true
   }
 }

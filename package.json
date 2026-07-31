@@ -1,5 +1,19 @@
 {
-  "module": "index.ts",
+  "name": "@realloon/deepseek",
+  "version": "0.1.0",
+  "description": "A lightweight DeepSeek Responses API client",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "types": "./index.ts",
+  "module": "./index.ts",
+  "files": [
+    "index.ts",
+    "src"
+  ],
   "devDependencies": {
     "@types/node": "^26.1.2",
     "typescript": "^7.0.2"
