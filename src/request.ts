@@ -16,6 +16,7 @@ export async function request(
   const apiKey = process.env.DEEPSEEK_API_KEY
   if (!apiKey) throw new Error('DEEPSEEK_API_KEY is not set')
 
+  const { signal, ...requestBody } = request
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -23,9 +24,10 @@ export async function request(
       Accept: request.stream ? 'text/event-stream' : 'application/json',
       Authorization: `Bearer ${apiKey}`,
     },
+    signal: signal ?? null,
     body: JSON.stringify({
-      ...request,
-      model: request.model ?? defaultModel,
+      ...requestBody,
+      model: requestBody.model ?? defaultModel,
     }),
   })
 

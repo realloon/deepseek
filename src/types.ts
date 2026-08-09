@@ -30,7 +30,6 @@ type MessageFields<Role extends MessageRole> = {
 }
 
 export type Message<Role extends MessageRole = MessageRole> = MessageFields<Role>
-
 export type UserMessage = Message<'user'>
 export type AssistantMessage = Message<'assistant'>
 export type SystemMessage = Message<'system'>
@@ -209,6 +208,7 @@ type RequestOptions = {
   tools?: Tool[]
   tool_choice?: ToolChoice
   user?: string
+  signal?: AbortSignal
 }
 
 export type RequestBody = RequestOptions &
