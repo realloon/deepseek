@@ -1,5 +1,5 @@
-import type { RequestBody, Response, Usage } from './types'
-import { request } from './request'
+import type { RequestBody, Response, Usage } from './types.js'
+import { request } from './request.js'
 
 export type GenerateTextResult = {
   text: string

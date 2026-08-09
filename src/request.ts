@@ -1,5 +1,5 @@
-import type { Request, Response, StreamEvent, StreamRequest } from './types'
-import parseStream from './parseStream'
+import type { Request, Response, StreamEvent, StreamRequest } from './types.js'
+import parseStream from './parseStream.js'
 
 const endpoint = 'https://api.deepseek.com/responses'
 const defaultModel = 'deepseek-v4-flash'

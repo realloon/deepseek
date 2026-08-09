@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "rootDir": ".",
+    "outDir": "dist",
+    "declaration": true,
+    "skipLibCheck": true,
     "exactOptionalPropertyTypes": true,
-    "types": ["node"],
-    "noEmit": true
-  }
+    "types": ["node"]
+  },
+  "include": ["index.ts", "src"]
 }
