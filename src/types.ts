@@ -29,7 +29,8 @@ type MessageFields<Role extends MessageRole> = {
   output?: never
 }
 
-export type Message<Role extends MessageRole = MessageRole> = MessageFields<Role>
+export type Message<Role extends MessageRole = MessageRole> =
+  MessageFields<Role>
 export type UserMessage = Message<'user'>
 export type AssistantMessage = Message<'assistant'>
 export type SystemMessage = Message<'system'>
@@ -199,7 +200,7 @@ type TextFormat =
 
 type RequestOptions = {
   model?: Model
-  reasoning?: { effort: 'none' | 'high' | 'max' }
+  reasoning?: { effort: 'none' | 'low' | 'high' | 'max' }
   max_output_tokens?: number
   temperature?: number
   top_p?: number
