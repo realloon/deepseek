@@ -1,4 +1,4 @@
-export type Model = 'deepseek-v4-flash' | 'deepseek-v4-pro'
+export type Model = 'deepseek-v4-flash' | 'deepseek-v4-flash-vision-exp' | 'deepseek-v4-pro'
 
 type ItemStatus = 'in_progress' | 'completed' | 'incomplete'
 
