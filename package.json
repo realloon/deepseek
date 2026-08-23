@@ -1,6 +1,6 @@
 {
   "name": "@realloon/deepseek",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A lightweight DeepSeek Responses API client",
   "license": "MIT",
   "keywords": [
