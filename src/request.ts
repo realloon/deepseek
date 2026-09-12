@@ -2,7 +2,7 @@ import type { Request, Response, StreamEvent, StreamRequest } from './types.js'
 import parseStream from './parseStream.js'
 
 const endpoint = 'https://api.deepseek.com/responses'
-const defaultModel = 'deepseek-v4-flash'
+const defaultModel = 'deepseek-flash'
 
 export function request(request: Request): Promise<Response>
 
